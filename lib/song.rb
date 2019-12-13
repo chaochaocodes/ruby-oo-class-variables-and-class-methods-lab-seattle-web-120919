@@ -26,15 +26,14 @@ class Song
           @@genres.uniq!
       end 
     
-      def self.genre_count #return histogram hash 
+      def self.genre_count 
+    # return histogram hash using Ruby enumerable: 
+    # https://stackoverflow.com/questions/19101167/how-to-create-a-histogram-from-a-flat-array-in-ruby
+        
         Hash[*@@genres.group_by{|v|v}.flat_map{|k, v| [k, v.size]}]
-      # iterate over .genres, every new genre creates a new key
-      # if key exists, counter += 1. {"rap" => 5, "rock" => 1, "country" => 3}
-    
       end
     
       def self.artist_count
         Hash[*@@artists.group_by{|v|v}.flat_map{|k, v| [k, v.size]}]
-      # => {"Beyonce" => 17, "Jay-Z" => 40}
       end 
     end 
